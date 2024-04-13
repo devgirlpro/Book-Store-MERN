@@ -21,6 +21,7 @@ const Home = () => {
         setLoading(false);
       } catch (err) {
         setError(err);
+        console.log(error)
       } finally {
         setLoading(false);
       }
