@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import axios from 'axios';
@@ -98,7 +97,7 @@ const EditeBook = () => {
             />
           </div>
 
-          <button type="submit" className="p-2 bg-sky-300 m-8">
+          <button type="submit" className="p-2 bg-sky-300 my-4 w-full">
             Save
           </button>
         </form>
