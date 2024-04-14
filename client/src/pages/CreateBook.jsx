@@ -3,19 +3,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import axios from 'axios';
-
-
+import Spinner from '../components/Spinner';
 
 const CreateBook = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [publishYear, setpublishYear] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleSaveBook =async (e) => {
+  const handleSaveBook = async (e) => {
     e.preventDefault();
     const inputBookData = {
       title,
@@ -24,29 +23,28 @@ const CreateBook = () => {
     };
     setLoading(true);
     try {
-        const response = await axios.post('http://localhost:5555/books', inputBookData);
-        setLoading(false);
-        console.log('Book saved successfully:', response.data); // 
-
-        //clear form field after successful save
-        setTitle('')
-        setAuthor('')
-        setpublishYear('')
-
-        // Redirect to a confirmation page
-        navigate('/')
-
+      const response = await axios.post(
+        'http://localhost:5555/books',
+        inputBookData
+      );
+      setLoading(false);
+      console.log('Book saved successfully:', response.data); //
+      //clear form field after successful save
+      setTitle('');
+      setAuthor('');
+      setpublishYear('');
+      // Redirect to a confirmation page
+      navigate('/');
     } catch (err) {
-        setLoading(false);
-        setError(err)
-        console.log(error)
+      setLoading(false);
+      setError(err);
+      console.log(error);
     }
-    
   };
 
   return (
     <div className="p-4">
-        <BackButton />
+      <BackButton />
       <h1 className="text-3x1 my-4">CreateBook</h1>
       {loading ? <Spinner /> : ''}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
@@ -81,11 +79,7 @@ const CreateBook = () => {
             />
           </div>
 
-          <button
-            type="submit"
-            className="p-2 bg-sky-300 m-8"
-            onClick={handleSaveBook}
-          >
+          <button type="submit" className="p-2 bg-sky-300 m-8">
             Save
           </button>
         </form>
